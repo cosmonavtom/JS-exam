@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO Manager</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!--Общий контейнер для всего приложения-->
+    <div class="container">
+        <header>
+            <h1>TODO Manager</h1>
+            <!-- Контейнер для кнопки переключения Светлой/Тёмной темы.-->
+            <div class="theme-switcher">
+                <button id="theme-toggle">Тёмная тема</button>
+            </div>
+        </header>
+        <!-- Контейнер для элементов управления задачами -->
+        <div class="task-controls">
+            <!-- Поле и кнопка для добавления новой задачи -->
+            <input type="text" id="task-input" placeholder="Добавить новую задачу...">
+            <button id="add-task">Добавить</button>
+            <!-- Выпадающий список для фильтрации задач -->
+            <select id="filter-tasks">
+                <option value="all">Все задачи</option>
+                <option value="completed">Выполненные</option>
+                <option value="uncompleted">Невыполненные</option>
+                <option value="favorite">Избранные</option>
+            </select>
+        </div>
+
+        <!-- Список задач. Для теста будут сразу добавлены рандомные задачи с помощью js -->
+        <ul id="task-list"></ul>
+
+        <!-- Модальное окно для редактирования задачи -->
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close">X</span>
+                <h2>Редактировать задачу</h2>
+                <input type="text" id="edit-task-input">
+                <button id="save-task">Сохранить</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+<!--    <script src="api.js"></script>-->
+<!--    <script src="storage.js"></script>-->
+<!--    <script src="utils.js"></script>-->
+</body>
+</html>
