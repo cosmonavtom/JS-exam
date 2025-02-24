@@ -54,10 +54,12 @@ header {
 
 .modal-content {
     background-color: #fff;
+    color: #444444;
     padding: 20px;
     border-radius: 5px;
     width: 300px;
 }
+
 
 .close {
     float: right;

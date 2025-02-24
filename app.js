@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.toggle('dark-theme');
         const isDarkTheme = document.body.classList.contains('dark-theme');
         localStorage.setItem('theme', isDarkTheme ? 'dark' : 'light');
-        themeToggle.textContent = isDarkTheme ? 'Светлая тема' : 'Тёмная тема';
+        themeToggle.textContent = isDarkTheme ? 'Светлая тема 🌝' : 'Тёмная тема 🌚';
     });
 
     // Открытие модального окна для редактирования задачи
@@ -68,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Загрузка задач из API
     loadTasksFromAPI();
 
+    // Добавление задачи
     function addTask(text) {
         const newTask = {
             id: Date.now(),
@@ -81,6 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
         showToast('Задача добавлена');
     }
 
+    // Обновление задачи
     function updateTask(id, newText) {
         const task = tasks.find(task => task.id == id);
         task.text = newText;
@@ -89,6 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
         showToast('Задача обновлена');
     }
 
+    // Удаление задачи
     function deleteTask(id) {
         tasks = tasks.filter(task => task.id != id);
         saveTasks();
@@ -96,6 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
         showToast('Задача удалена');
     }
 
+    // Переключения статуса задачи
     function toggleTaskStatus(id) {
         const task = tasks.find(task => task.id == id);
         task.completed = !task.completed;
@@ -103,6 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderTasks();
     }
 
+    // Переключения "избранного"
     function toggleFavorite(id) {
         const task = tasks.find(task => task.id == id);
         task.favorite = !task.favorite;
@@ -110,6 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderTasks();
     }
 
+    // Фильтр задач
     function filterTasksList(filter) {
         let filteredTasks = [];
         switch (filter) {
@@ -128,6 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderTasks(filteredTasks);
     }
 
+    // Рендер задач
     function renderTasks(tasksToRender = tasks) {
         taskList.innerHTML = '';
         tasksToRender.forEach(task => {
@@ -158,10 +165,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Сохраняем массив задач в JSON
     function saveTasks() {
         localStorage.setItem('tasks', JSON.stringify(tasks));
     }
 
+    // загрузки задач
     function loadTasks() {
         const savedTasks = localStorage.getItem('tasks');
         if (savedTasks) {
@@ -170,47 +179,41 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // function showToast(message) {
-    //     const toast = document.createElement('div');
-    //     toast.className = 'toast';
-    //     toast.textContent = message;
-    //     document.body.appendChild(toast);
-    //     setTimeout(() => toast.remove(), 3000);
-    // }
     function showToast(message) {
-    // Создаём элемент уведомления
-    const toast = document.createElement('div');
-    toast.className = 'toast';
-    toast.textContent = message;
+        // Создаём элемент уведомления
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.textContent = message;
 
-    // Добавляем уведомление в верхнюю часть страницы
-    document.body.appendChild(toast);
+        // Добавляем уведомление в верхнюю часть страницы
+        document.body.appendChild(toast);
 
-    // Позиционируем уведомление сверху
-    toast.style.position = 'fixed';
-    toast.style.top = '20px'; // Отступ сверху
-    toast.style.left = '50%'; // Центрирование по горизонтали
-    toast.style.transform = 'translateX(-50%)'; // Смещение для точного центрирования
-    toast.style.padding = '10px 20px';
-    toast.style.backgroundColor = '#989393';
-    toast.style.color = '#2a8aed';
-    toast.style.borderRadius = '5px';
-    toast.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
-    toast.style.zIndex = '1000'; // Убедимся, что уведомление поверх других элементов
-    toast.style.transition = 'opacity 0.3s ease-in-out'; // Плавное исчезновение
+        // Позиционируем уведомление сверху
+        toast.style.position = 'fixed';
+        toast.style.top = '20px'; // Отступ сверху
+        toast.style.left = '50%'; // Центрирование по горизонтали
+        toast.style.transform = 'translateX(-50%)'; // Смещение для точного центрирования
+        toast.style.padding = '10px 20px';
+        toast.style.backgroundColor = '#989393';
+        toast.style.color = '#111c01';
+        toast.style.borderRadius = '5px';
+        toast.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+        toast.style.zIndex = '1000'; // Убедимся, что уведомление поверх других элементов
+        toast.style.transition = 'opacity 0.3s ease-in-out'; // Плавное исчезновение
 
-    // Показываем уведомление
-    setTimeout(() => {
-        toast.style.opacity = '1';
-    }, 10);
+        // Показываем уведомление
+        setTimeout(() => {
+            toast.style.opacity = '1';
+        }, 10);
 
-    // Удаляем уведомление через 3 секунды
-    setTimeout(() => {
-        toast.style.opacity = '0';
-        setTimeout(() => toast.remove(), 300); // Ждём завершения анимации
-    }, 3000);
-}
+        // Удаляем уведомление через 3 секунды
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            setTimeout(() => toast.remove(), 300); // Ждём завершения анимации
+        }, 3000);
+    }
 
+    // Загружает задачи с внешнего API (JSONPlaceholder)
     function loadTasksFromAPI() {
         fetch('https://jsonplaceholder.typicode.com/todos')
             .then(response => response.json())
